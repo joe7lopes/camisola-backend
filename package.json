@@ -1,0 +1,24 @@
+{
+  "name": "camisola-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joe7lopes/camisola-backend.git"
+  },
+  "scripts": {
+    "start": "node app",
+    "dev": "NODE_ENV=development nodemon ./app",
+    "test": "NODE_ENV=test jest"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.11"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2"
+  }
+}
