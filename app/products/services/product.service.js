@@ -1,5 +1,3 @@
-const db = require()
-
 const listAll = () => {
     return new Promise(function(resolve, reject) {
         // the function is executed automatically when the promise is constructed
