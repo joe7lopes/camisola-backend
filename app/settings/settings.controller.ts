@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 
 const router = require('express').Router();
-const { getAll } = require('../services/product.service');
+import { getAll } from './settings.service';
 
 router.get('/', async (req: Request, res: Response) => {
   try {
@@ -13,4 +13,4 @@ router.get('/', async (req: Request, res: Response) => {
 
 });
 
-module.exports = router;
+export default router;

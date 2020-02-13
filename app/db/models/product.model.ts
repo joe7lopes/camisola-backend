@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const productSchema = mongoose.Schema({
+const productSchema = new mongoose.Schema({
     pid: String,
     name: String,
     categories: [],
@@ -10,4 +10,4 @@ const productSchema = mongoose.Schema({
     defaultPrice: Number
 })
 
-module.exports = mongoose.model('Product', productSchema);
+export default mongoose.model('Product', productSchema);

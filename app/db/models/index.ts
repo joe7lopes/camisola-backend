@@ -1,5 +1,7 @@
-const ProductModel = require('./product.model');
+import ProductModel from './product.model';
+import SettingsModel from './settings.model';
 
-module.exports = {
-    ProductModel
+export {
+    ProductModel,
+    SettingsModel
 }
