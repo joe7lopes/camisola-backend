@@ -6,6 +6,16 @@ const options = {
   useUnifiedTopology: true
 };
 
-const connect = () => mongoose.connect(url, options);
+class DB {
 
-module.exports = connect;
+  connect() {
+    mongoose.Promise = global.Promise;
+    return mongoose.connect(url, options);
+  };
+
+  disconnect() {
+    return mongoose.disconnect();
+  }
+}
+
+export default new DB;

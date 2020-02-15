@@ -1,5 +1,7 @@
-import { ProductModel } from '../db/models';
-import { IProduct } from '../types';
-export const getAll = () => ProductModel.find();
+import { SettingsModel } from '../db/models';
 
-const createSizes = (product: IProduct) => ProductModel.create(product);
+export const getSettings = () => SettingsModel.findOne();
+
+export const updateAvailableSizes = (availableSizes: [string]) => SettingsModel
+    .updateOne({}, availableSizes)
+

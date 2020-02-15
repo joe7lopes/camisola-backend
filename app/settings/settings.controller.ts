@@ -1,16 +1,19 @@
 import { Response, Request } from "express";
 
 const router = require('express').Router();
-import { getAll } from './settings.service';
+import { getSettings } from './settings.service';
 
 router.get('/', async (req: Request, res: Response) => {
-  try {
-    const products = await getAll();
-    return res.send(products);
-  } catch (err) {
-    res.send({ error: err });
-  }
+  // try {
+  //   const settings = await getSettings();
+  //   return res.send(settings);
+  // } catch (err) {
+  //   res.send({ error: err });
+  // }
+  res.send('a');
 
 });
+
+
 
 export default router;
