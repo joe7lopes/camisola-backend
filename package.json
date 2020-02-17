@@ -13,7 +13,8 @@
   "scripts": {
     "start": "node ./app",
     "dev": "NODE_ENV=development nodemon ./app",
-    "test": "mocha './app/test/**/*.js'"
+    "test": "mocha './app/test/**/*.js'",
+    "test:watch": "mocha './app/test/**/*.js' --watch"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

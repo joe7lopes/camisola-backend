@@ -105,3 +105,6 @@ dist
 
 #ignore build folder
 build
+
+#IDE
+.idea
