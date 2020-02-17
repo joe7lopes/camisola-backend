@@ -8,6 +8,14 @@ const productSchema = new mongoose.Schema({
     images: [],
     isCustomizable: Boolean,
     defaultPrice: Number
-})
+});
+
+productSchema.methods.toJSON = function() {
+    let obj = this.toObject();
+    delete obj._id;
+    delete obj.__v;
+    return obj;
+};
+
 
 module.exports = mongoose.model('Product', productSchema);

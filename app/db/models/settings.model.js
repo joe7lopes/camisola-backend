@@ -7,7 +7,7 @@ const SettingsSchema = new mongoose.Schema({
 });
 
 SettingsSchema.methods.toJSON = function() {
-  var obj = this.toObject();
+  let obj = this.toObject();
   delete obj._id;
   delete obj.__v;
   return obj;
