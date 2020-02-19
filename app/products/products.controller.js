@@ -13,14 +13,11 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const newProduct = {
-      pid: 6,
-      ...req.body
-    };
-    const createdProduct = await ProductModel.create(newProduct);
+    const createdProduct = await ProductModel.create(req.body);
     return res.status(201).send(createdProduct);
   } catch (err) {
-    return res.send({error: err});
+    console.log(err);
+    return res.status(400).send({error: err});
   }
 
 });

@@ -41,8 +41,68 @@ describe('/products', () => {
 
   describe('/POST', () => {
     it('should create product with unique id', async () => {
+
+      const availableSizes = [
+        {size: 'S', price: 20},
+        {size: 'XS', price: 44},
+        {size: 'L', price: 30},
+      ];
+
       const newProduct = {
         name: 'camisola benfica slb glorioso',
+        categories: ['benfica'],
+        availableSizes,
+        images: [],
+        isCustomizable: true,
+        defaultPrice: 35
+      };
+
+      const newProduct2 = {
+        name: 'camisola benfica summer',
+        categories: 'benfica',
+        availableSizes,
+        images: [],
+        isCustomizable: true,
+        defaultPrice: 35
+      };
+
+      const response1 = await api.post('/products')
+        .send(newProduct)
+        .expect(201);
+
+      const response2 = await api.post('/products')
+        .send(newProduct2)
+        .expect(201);
+
+      expect(response1.body.pid).to.be.a('string');
+      expect(response2.body.pid).to.be.a('string');
+      expect(response1.body.pid).not.eq(response2.body.pid);
+    });
+
+    it('should not create product with invalid size', async () => {
+
+    });
+
+    it('should not create product for unknown categories', async () => {
+
+    });
+
+    it('should not create product if price is not set', async () => {
+      const newProduct = {
+        name: 'camisola benfica summer',
+        categories: ['benfica'],
+        availableSizes: ['S', 'XS', 'L'],
+        images: [],
+        isCustomizable: true,
+      };
+
+      await api.post('/products')
+        .send(newProduct)
+        .expect(400);
+    });
+
+    it('should not create product without a name', async () => {
+      const newProduct = {
         categories: ['benfica'],
         availableSizes: ['S', 'XS', 'L'],
         images: [],
@@ -50,13 +110,12 @@ describe('/products', () => {
         defaultPrice: 35
       };
 
-      const response = await api.post('/products').send(newProduct).expect(201);
-      const pid = response.body.pid;
-      expect(pid).to.be.a('string');
+      await api.post('/products')
+        .send(newProduct)
+        .expect(400);
 
-      const dataBaseDocument = await ProductModel.findOne({pid});
-      expect(dataBaseDocument.toJSON()).eql({pid, ...newProduct});
     });
-  })
+
+  });
 
 });
