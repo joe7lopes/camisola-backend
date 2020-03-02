@@ -26,7 +26,7 @@ describe('/products', () => {
       pid: '1xs',
       name: 'camisola benfica slb glorioso',
       categories: ['benfica'],
-      availableSizes: ['S', 'XS', 'L'],
+      sizes: [{size: 'S', price: 5}, {size: 'XS', price: 12}, {size: 'L', price: 7}],
       images: [],
       isCustomizable: true,
       defaultPrice: 35
@@ -42,7 +42,7 @@ describe('/products', () => {
   describe('/POST', () => {
     it('should create product with unique id', async () => {
 
-      const availableSizes = [
+      const sizes = [
         {size: 'S', price: 20},
         {size: 'XS', price: 44},
         {size: 'L', price: 30},
@@ -51,7 +51,7 @@ describe('/products', () => {
       const newProduct = {
         name: 'camisola benfica slb glorioso',
         categories: ['benfica'],
-        availableSizes,
+        sizes,
         images: [],
         isCustomizable: true,
         defaultPrice: 35
@@ -60,7 +60,7 @@ describe('/products', () => {
       const newProduct2 = {
         name: 'camisola benfica summer',
         categories: 'benfica',
-        availableSizes,
+        sizes,
         images: [],
         isCustomizable: true,
         defaultPrice: 35
@@ -80,18 +80,40 @@ describe('/products', () => {
     });
 
     it('should not create product with invalid size', async () => {
+      const newProduct = {
+        name: 'camisola benfica summer',
+        categories: ['benfica'],
+        sizes: [{size: 'test', price: 5}],
+        images: [],
+        isCustomizable: true,
+        defaultPrice: 12
+      };
 
+      await api.post('/products')
+        .send(newProduct)
+        .expect(400);
     });
 
     it('should not create product for unknown categories', async () => {
+      const newProduct = {
+        name: 'camisola benfica summer',
+        categories: ['benf'],
+        sizes: [],
+        images: [],
+        isCustomizable: true,
+        defaultPrice: 12
+      };
 
+      await api.post('/products')
+        .send(newProduct)
+        .expect(400);
     });
 
     it('should not create product if price is not set', async () => {
       const newProduct = {
         name: 'camisola benfica summer',
         categories: ['benfica'],
-        availableSizes: ['S', 'XS', 'L'],
+        sizes: ['S', 'XS', 'L'],
         images: [],
         isCustomizable: true,
       };
@@ -104,7 +126,7 @@ describe('/products', () => {
     it('should not create product without a name', async () => {
       const newProduct = {
         categories: ['benfica'],
-        availableSizes: ['S', 'XS', 'L'],
+        sizes: ['S', 'XS', 'L'],
         images: [],
         isCustomizable: true,
         defaultPrice: 35

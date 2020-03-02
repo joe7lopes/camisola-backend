@@ -108,3 +108,6 @@ build
 
 #IDE
 .idea
+
+#auth keys
+*.key

@@ -1,26 +1,24 @@
 const mongoose = require('mongoose');
 const uuid = require('uuid');
+const {ProductCategorySchema} = require('./common_schema');
 
-const getCategories = () => {
-  return ['benfica', 'porto'];
-};
-
-const AvailableSizeSchema = new mongoose.Schema({
-  size: {type: String, enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL'], required: true},
-  price: Number
+const SizeSchema = new mongoose.Schema({
+  size: {type: String, required: true},
+  price: {type: Number, required: true}
 });
 
 const productImageSchema = new mongoose.Schema({
-  name: String,
+  name: {type: String, required: true},
   url: String,
+  file: String,
   isDefault: Boolean
 });
 
 const productSchema = new mongoose.Schema({
   pid: {type: String, default: () => uuid.v4()},
   name: {type: String, required: true},
-  categories: {type: [String], enum: getCategories(), required: true},
-  availableSizes: [AvailableSizeSchema],
+  categories: {type: [ProductCategorySchema], required: true},
+  sizes: [SizeSchema],
   images: [productImageSchema],
   isCustomizable: {type: Boolean, default: false},
   defaultPrice: {type: Number, required: true}

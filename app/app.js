@@ -4,7 +4,7 @@ const routes = require('./routes');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit:'3mb'}));
 app.use(routes);
 
 module.exports = app;

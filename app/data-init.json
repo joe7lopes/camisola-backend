@@ -1,0 +1,20 @@
+//db.getCollection('settings').insertOne()
+
+{
+  sizes: [
+    'S',
+    'XL'
+  ],
+  productDefaultPrice: 5,
+  stampingExtraCost: 12,
+  productCategories: [
+    {
+      name: "benfica",
+      displayName: 'Benfica'
+    },
+      {
+          name: "porto",
+          displayName: 'Porto'
+      }
+  ]
+}

@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
+const ProductCategorySchema = require('./common_schema');
 
 const SettingsSchema = new mongoose.Schema({
-  availableSizes: [],
+  sizes: [String],
   productDefaultPrice: Number,
-  stampingExtraCost: Number
+  stampingExtraCost: Number,
+  productCategories:[ProductCategorySchema]
 });
 
 SettingsSchema.methods.toJSON = function() {

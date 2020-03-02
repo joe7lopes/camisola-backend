@@ -9,7 +9,7 @@ describe('GET /Settings', () => {
   before(async () => await connect());
 
   const settings = {
-    availableSizes: ['S', 'XL'],
+    sizes: ['S', 'XL'],
     productDefaultPrice: 5,
     stampingExtraCost: 12
   };
@@ -28,7 +28,7 @@ describe('GET /Settings', () => {
     const res = await request(app).get('/settings');
     expect(res.status).eq(200);
     expect(res.body).to.eql({
-      availableSizes: ['S', 'XL'],
+      sizes: ['S', 'XL'],
       productDefaultPrice: 5,
       stampingExtraCost: 12
     });
@@ -37,11 +37,11 @@ describe('GET /Settings', () => {
   it('should update available sizes', async () => {
     await request(app)
       .put('/settings')
-      .send({availableSizes: ['XS']})
+      .send({sizes: ['XS']})
       .expect(200);
 
     const doc = await SettingsModel.findOne();
-    expect(doc.toJSON().availableSizes).eql(['XS']);
+    expect(doc.toJSON().sizes).eql(['XS']);
   });
 
   it('should update only default price', async () => {
@@ -52,7 +52,7 @@ describe('GET /Settings', () => {
 
     const doc = await SettingsModel.findOne();
     const data = doc.toJSON();
-    expect(data.availableSizes).eql(settings.availableSizes);
+    expect(data.sizes).eql(settings.sizes);
     expect(data.productDefaultPrice).eq(5);
   });
 
@@ -64,7 +64,7 @@ describe('GET /Settings', () => {
 
     const doc = await SettingsModel.findOne();
     const data = doc.toJSON();
-    expect(data.availableSizes).eql(settings.availableSizes);
+    expect(data.sizes).eql(settings.sizes);
     expect(data.productDefaultPrice).eq(settings.productDefaultPrice);
     expect(data.stampingExtraCost).eq(5);
   });
